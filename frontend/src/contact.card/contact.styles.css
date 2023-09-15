@@ -1,0 +1,23 @@
+/* Add these styles to your list.styles.css file */
+
+.names {
+    display: grid;
+    grid-template-rows: auto auto; /* Define the number of rows as needed */
+    gap: 10px; /* Adjust the gap between rows */
+    background-color: #225498;
+    border: 1px solid white;
+    border-radius: 5px;
+    justify-items: center;
+    align-items: center;
+    padding: 25px;
+    cursor: pointer;
+    margin: 15px;
+  }
+  
+  /* Optionally, you can add styles for the individual items within the grid */
+  .names > * {
+    /* Add styles for the child elements (e.g., text) */
+    color: white;
+    text-align: center;
+  }
+  

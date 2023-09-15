@@ -1,0 +1,57 @@
+/* DeleteButton */
+.button-container {
+    min-width: 65px;
+    width: auto;
+    height: 40px;
+    letter-spacing: 0.5px;
+    padding: 0 35px;
+    font-size: 15px;
+    background-color: crimson;
+    color: white;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container:hover {
+    background-color: #8B0001;
+    color: black;
+    border: 1px solid black;
+}
+
+/* AddButton */
+.button-container.add {
+    background-color: #32CD32;
+    color: white;
+}
+
+.button-container.add:hover {
+    background-color: #40A060;
+    border: none;
+}
+
+/* StatsButton */
+.button-container.stats {
+    background-color: #000080;
+    color: white;
+    border: 1px solid white;
+}
+
+.button-container.stats:hover {
+    background-color: black;
+    color: white;
+    border: none;
+}
+
+@media screen and (max-width: 480px) {
+    .button-container.DeleteButton {
+        min-width: 120px;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 20px;
+        font-size: 14px;
+    }
+}

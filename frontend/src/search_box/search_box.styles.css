@@ -1,0 +1,17 @@
+
+
+.search-bar {
+    width: 250px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 5fr 1fr; /* Two columns, first takes most space, second auto sizes to button content */
+    align-items: center; /* Vertically center items */
+    gap: 10px; /* Add spacing between input and button */
+    padding: 10px;
+
+  }
+
+input{
+    height: 40px;
+    border: 4px solid #8c52ff;
+}
