@@ -1,6 +1,8 @@
-import React from "react";
-import Button from "../Button/Button.components";
-import './contact.styles.css'
+import React from 'react';
+import Button from '../Button/Button.components';
+import PhoneNumber from '../Phone_Number/Phone_Number.components';
+import './contact.styles.css';
+
 
 const Contact = (props) => {
   const onClick = () => {
@@ -12,7 +14,11 @@ const Contact = (props) => {
   return (
     <div className="names">
       <li>
-        {props.description}{" "}
+        {props.description}
+        <PhoneNumber
+          phoneNumbers={props.phoneNumbers}
+          setPhoneNumbers={props.setPhoneNumbers}
+        />
         <Button buttonType="delete" onClick={onClick}>
           Delete
         </Button>

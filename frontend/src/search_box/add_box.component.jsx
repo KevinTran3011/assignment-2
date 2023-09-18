@@ -1,6 +1,6 @@
-import './search_box.styles.css';
+import './add_box.styles.css';
 
-const Search_box = ({className, onChangeHandler}) =>{
+const Add_box = ({className, onChangeHandler}) =>{
     return(
         <div className='search-bar'>
             <input className={`search-box ${className}`}  
@@ -11,4 +11,4 @@ const Search_box = ({className, onChangeHandler}) =>{
     )
 }
 
-export default Search_box
+export default Add_box

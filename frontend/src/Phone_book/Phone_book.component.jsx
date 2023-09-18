@@ -10,9 +10,12 @@ const PhoneBook = () => {
     { id: 3, description: "su" },
   ]);
 
+  const [phoneNumbers, setPhoneNumbers] = useState([]);
   return (
     <div className="phoneBook">
-      <List Numbers={Numbers} setNumbers={setNumbers} />
+      <List Numbers={Numbers} setNumbers={setNumbers} 
+      phoneNumbers={phoneNumbers} setPhoneNumbers={setPhoneNumbers} />
+      
       <Button buttonType="stats">View Stats</Button>
     </div>
   );

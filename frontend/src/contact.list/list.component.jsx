@@ -1,8 +1,7 @@
-// List.component.jsx
 import React, { useState } from "react";
 import "./list.styles.css";
-import Contact from "../contact.card/contact.component";
-import Search_box from "../search_box/search_box.component";
+import Contact from "../contact.card/contact.component"; // Import the Contact component here
+import Add_box from "../search_box/add_box.component";
 import Button from "../Button/Button.components";
 
 const List = (props) => {
@@ -14,7 +13,7 @@ const List = (props) => {
 
   const onClickHandler = () => {
     if (newContact.trim() === '') {
-      return; // Don't add empty contacts
+      return; 
     }
 
     props.setNumbers(Numbers => [
@@ -25,17 +24,15 @@ const List = (props) => {
       }
     ]);
 
-    setNewContact(''); // Clear the input field after adding
+    setNewContact('');
   }
 
   return (
     <div className="NameList">
-
-        <Search_box onChangeHandler={onChangeHandler} />
-        <Button buttonType="add" type="button" onClick={onClickHandler}>
-          Add
-        </Button>
-
+      <Add_box onChangeHandler={onChangeHandler} />
+      <Button buttonType="add" type="button" onClick={onClickHandler}>
+        Add
+      </Button>
       <ul className="ContactList">
         {props.Numbers.map((item) => (
           <Contact
@@ -43,6 +40,8 @@ const List = (props) => {
             key={item.id}
             id={item.id}
             description={item.description}
+            phoneNumbers={props.phoneNumbers} // Pass phoneNumbers
+            setPhoneNumbers={props.setPhoneNumbers} // Pass setPhoneNumbers
           />
         ))}
       </ul>
@@ -51,3 +50,4 @@ const List = (props) => {
 };
 
 export default List;
+
