@@ -16,7 +16,7 @@ const PhoneBook = () => {
       <List Numbers={Numbers} setNumbers={setNumbers} 
       phoneNumbers={phoneNumbers} setPhoneNumbers={setPhoneNumbers} />
       
-      <Button buttonType="stats">View Stats</Button>
+      {/* <Button buttonType="stats">View Stats</Button> */}
     </div>
   );
 };

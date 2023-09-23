@@ -1,16 +1,14 @@
 .phoneBook {
-    background-color: #32299b;
-    color: white;
-    border: 5px solid white;
-    border-radius: 10px;
-    display: grid;
-    place-items: center;
-    margin: 50px; /* Margin for all directions */
-    width: 600px; /* Adjust the width as needed */
-    grid-template-columns: 1fr; /* Center items horizontally */
-    grid-template-rows: repeat(auto-fill, minmax(100px, 1fr)); /* Center items vertically */
-    padding: 15px;
-    grid-gap: 85px;
-    min-height: 200px; /* Set a minimum height if needed */
-  }
-  
+  background-color: #de9e7c;
+  color: white;
+  border: 5px solid white;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  margin: 50px; /* Margin for all directions */
+  width: 600px; /* Adjust the width as needed */
+  grid-template-columns: 1fr; /* Center items horizontally */
+  grid-template-rows: auto; /* Auto-adjust height based on content */
+  padding: 15px;
+  grid-gap: 85px;
+}

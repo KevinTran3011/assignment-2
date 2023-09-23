@@ -13,7 +13,7 @@ const Contact = (props) => {
 
   return (
     <div className="names">
-      <li>
+      <li className='numbers_for_contacts'>
         {props.description}
         <PhoneNumber
           phoneNumbers={props.phoneNumbers}

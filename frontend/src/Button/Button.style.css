@@ -6,7 +6,7 @@
     letter-spacing: 0.5px;
     padding: 0 35px;
     font-size: 15px;
-    background-color: crimson;
+    background-color: #ff6b6b;
     color: white;
     text-transform: uppercase;
     border: none;
@@ -24,7 +24,7 @@
 
 /* AddButton */
 .button-container.add {
-    background-color: #32CD32;
+    background-color: #a6de7c;
     color: white;
 }
 

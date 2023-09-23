@@ -1,0 +1,7 @@
+.number_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto; /* Three columns: 1st for input, 2nd for buttons, 3rd for buttons */
+    gap: 10px; /* Adjust the gap as needed */
+    align-items: center; /* Vertically center items */
+  }
+  

@@ -4,7 +4,7 @@
     display: grid;
     grid-template-rows: auto auto; /* Define the number of rows as needed */
     gap: 10px; /* Adjust the gap between rows */
-    background-color: #225498;
+    background-color: #a8c8f0;
     border: 1px solid white;
     border-radius: 5px;
     justify-items: center;
@@ -14,10 +14,8 @@
     margin: 15px;
   }
   
-  /* Optionally, you can add styles for the individual items within the grid */
   .names > * {
-    /* Add styles for the child elements (e.g., text) */
-    color: white;
+    color: #333333 ;
     text-align: center;
   }
-  
+

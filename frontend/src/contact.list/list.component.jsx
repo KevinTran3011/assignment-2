@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "./list.styles.css";
-import Contact from "../contact.card/contact.component"; // Import the Contact component here
+import Contact from "../contact.card/contact.component";
 import Add_box from "../search_box/add_box.component";
 import Button from "../Button/Button.components";
 
 const List = (props) => {
   const [newContact, setNewContact] = useState('');
+  const [contactPhoneNumbers, setContactPhoneNumbers] = useState({}); 
 
   const onChangeHandler = (event) => {
     setNewContact(event.target.value);
@@ -16,13 +17,20 @@ const List = (props) => {
       return; 
     }
 
-    props.setNumbers(Numbers => [
+    const newContactId = props.Numbers.length + 1;
+    props.setNumbers((Numbers) => [
       ...Numbers,
       {
-        id: Numbers.length + 1,
+        id: newContactId,
         description: newContact
       }
     ]);
+
+    // Initialize an empty array for phone numbers for the new contact
+    setContactPhoneNumbers({
+      ...contactPhoneNumbers,
+      [newContactId]: []
+    });
 
     setNewContact('');
   }
@@ -40,8 +48,13 @@ const List = (props) => {
             key={item.id}
             id={item.id}
             description={item.description}
-            phoneNumbers={props.phoneNumbers} // Pass phoneNumbers
-            setPhoneNumbers={props.setPhoneNumbers} // Pass setPhoneNumbers
+            phoneNumbers={contactPhoneNumbers[item.id] || []} // Pass phone numbers for the specific contact
+            setPhoneNumbers={(newPhoneNumbers) => {
+              setContactPhoneNumbers({
+                ...contactPhoneNumbers,
+                [item.id]: newPhoneNumbers
+              });
+            }}
           />
         ))}
       </ul>
@@ -50,4 +63,3 @@ const List = (props) => {
 };
 
 export default List;
-
