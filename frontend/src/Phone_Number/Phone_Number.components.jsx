@@ -33,12 +33,13 @@ const PhoneNumber = ({ phoneNumbers, setPhoneNumbers }) => {
               value={phoneNumber}
               onChange={(e) => updatePhoneNumber(index, e.target.value)}
             />
+            <Button buttonType="add" onClick={() => confirmNumber(index)}>
+              Add
+            </Button>
             <Button buttonType="delete" onClick={() => deleteNumber(index)}>
               Delete
             </Button>
-            <Button buttonType="add" onClick={() => confirmNumber(index)}>
-              Confirm
-            </Button>
+
           </li>
         ))}
       </ul>
