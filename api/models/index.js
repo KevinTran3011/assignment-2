@@ -23,4 +23,10 @@ db.sequelize = sequelize;
 db.contacts = require("./contact.model.js")(sequelize, Sequelize);
 db.phones = require("./phone.model.js")(sequelize, Sequelize);
 
+
+// cardinality of 1:N
+
+db.contacts.hasMany(db.phones, { as: 'phones', foreignKey: 'contactId' });
+db.phones.belongsTo(db.contacts, { foreignKey: 'contactId' });
+
 module.exports = db;
