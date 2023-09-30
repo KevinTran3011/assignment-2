@@ -21,7 +21,7 @@ services:
     volumes:
       - ./frontend:/app
     links:
-      - api
+      - api 
   
   api:
     build: 

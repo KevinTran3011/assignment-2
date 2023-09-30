@@ -6,15 +6,24 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
         },
 
-        num_type: {
-            type: Sequelize.STRING
+        name: {
+            type: Sequelize.STRING,
+            allowNull: false,
 
 
         },
 
-        phone_number: {
+        phoneNumber: {
             type: Sequelize.STRING,
+            allowNull: false,
+        },
+
+        contactId:{
+            type: Sequelize.INTEGER,
         }
+
+
+
         // DEFINE YOUR MODEL HERE
     });
   
