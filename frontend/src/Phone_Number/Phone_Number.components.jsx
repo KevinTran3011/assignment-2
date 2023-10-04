@@ -30,9 +30,17 @@ const PhoneNumber = ({ phoneNumbers, setPhoneNumbers }) => {
           <li className = 'number_list' key={index}>
             <input
               type="text"
+              placeholder='Type of number'
+            />
+
+            <input
+              type="text"
               value={phoneNumber}
+              placeholder='Ex: 2345645645'
               onChange={(e) => updatePhoneNumber(index, e.target.value)}
             />
+
+            
             <Button buttonType="add" onClick={() => confirmNumber(index)}>
               Add
             </Button>

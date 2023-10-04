@@ -4,10 +4,10 @@ const Phones = db.phones;
 const Op = db.Sequelize.Op; //Op is basically where clause
 
 // Create contact
-exports.create = async (req, res) => {
+exports.create = (req, res) => {
 
     try{
-        const newContact = await Contacts.create(req.body);
+        const newContact =  Contacts.create(req.body);
         res.json(newContact);
     }
     catch(err){
