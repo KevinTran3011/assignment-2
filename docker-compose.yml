@@ -9,6 +9,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80:80"
+    depends_on:
+      - frontend
     links:
       - frontend
       
@@ -20,6 +22,8 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend:/app
+    depends_on:
+      - api
     links:
       - api 
   

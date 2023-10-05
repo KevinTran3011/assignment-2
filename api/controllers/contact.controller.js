@@ -4,31 +4,35 @@ const Phones = db.phones;
 const Op = db.Sequelize.Op; //Op is basically where clause
 
 // Create contact
-exports.create = (req, res) => {
 
-    try{
-        const newContact =  Contacts.create(req.body);
-        res.json(newContact);
+exports.create = async (req, res) => {
+    try {
+      const contact = {
+        name: req.body.name,
+      };
+  
+      // Create the contact in the database
+      const createdContact = await Contacts.create(contact);
+  
+      console.log('Created contact:', createdContact); // Log the created contact data
+  
+      // Send a valid JSON response
+      res.status(201).json({ contact: createdContact.toJSON() });
+    } catch (err) {
+      console.error("Error creating contact:", err);
+      res.status(500).json({ error: err.message || "Some error occurred while creating the Contact." }); // Respond with a JSON object containing the error message
     }
-    catch(err){
-        res.json({message: 'Error while creating contact: ' + err})
-    }
-    
-    
-};
+  };
 
 // Get all contacts
 exports.findAll = async (req, res) => {
 
-    try{
-        const contactList = await Contacts.findAll();
-        res.json(contactList);
-
-    } catch(err){
-        res.json({message: 'Error getting contacts: ' + err})
-
-
-    }
+    Contacts.findAll().then(data=>{
+        res.send(data)
+    })
+    .catch(error =>{
+        res.send({message: 'Error while fetching data: ' + error})
+    })
     
 };
 
@@ -75,21 +79,22 @@ exports.update = async (req, res) => {
 };
 
 // Delete one contact by id
-exports.delete = async (req, res) => {
-
-    const contact_id = req.params.contactId;
-
-    try{
-        const contact_delete = await Contacts.destroy({
-            where: {id: contact_id}
-        })
-
-        res.json({})
-        
-
-    } catch(err){
-        res.json({message: 'Error while deleting the contact; ' + err})
-        
-    }
-    
-};
+exports.delete = (req, res) => {
+    const id = parseInt(req.params.contactId); // Convert the id parameter to an integer
+  
+    Contacts.destroy({
+      where: { id: id },
+    })
+      .then((num) => {
+        if (num == 1) {
+          res.send({ message: "Contact was deleted successfully!" });
+        } else {
+          res.send({ message: "Cannot delete Contact. Contact not found." });
+        }
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: "Error while deleting the contact: " + err.message,
+        });
+      });
+  };

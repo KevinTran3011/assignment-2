@@ -12,28 +12,41 @@ const List = (props) => {
     setNewContact(event.target.value);
   }
 
-  const onClickHandler = () => {
-    if (newContact.trim() === '') {
-      return; 
-    }
+  const onClickHandler = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/contacts/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name: newContact })
+      });
+  
+      const responseData = await response.text(); // Get the response data as a string
+      console.log('Response data:', responseData); // Log the response data
+  
+      try {
+        const parsedData = JSON.parse(responseData); // Try to parse the response data as JSON
+        if (parsedData && parsedData.contact) { // Check if the parsed data is valid JSON and contains the created contact data
+          props.setNumbers([...props.Numbers, parsedData.contact]); // Use the correct key to access the created contact data
 
-    const newContactId = props.Numbers.length + 1;
-    props.setNumbers((Numbers) => [
-      ...Numbers,
-      {
-        id: newContactId,
-        description: newContact
+          setContactPhoneNumbers({
+            ...contactPhoneNumbers,
+            [parsedData.contact.id]: []
+          });
+
+          setNewContact('');
+        } else {
+          console.error('Error creating contact:', parsedData); // Log the error message
+        }
+      } catch (error) {
+        console.error('Error parsing response data:', error); // Log the error message
       }
-    ]);
-
-    // Initialize an empty array for phone numbers for the new contact
-    setContactPhoneNumbers({
-      ...contactPhoneNumbers,
-      [newContactId]: []
-    });
-
-    setNewContact('');
+    } catch (error) {
+      console.error('Error creating contact:', error);
+    }
   }
+
 
   return (
     <div className="NameList">
@@ -44,18 +57,20 @@ const List = (props) => {
       <ul className="ContactList">
         {props.Numbers.map((item) => (
           <Contact
-            setNumbers={props.setNumbers}
-            key={item.id}
-            id={item.id}
-            description={item.description}
-            phoneNumbers={contactPhoneNumbers[item.id] || []} // Pass phone numbers for the specific contact
-            setPhoneNumbers={(newPhoneNumbers) => {
-              setContactPhoneNumbers({
-                ...contactPhoneNumbers,
-                [item.id]: newPhoneNumbers
-              });
-            }}
-          />
+          setNumbers={props.setNumbers}
+          key={item.id}
+          id={item.id}
+          description={item.name}
+          phoneNumbers={contactPhoneNumbers[item.id] || []}
+          Numbers={props.Numbers} // Pass the Numbers prop to Contact
+          setPhoneNumbers={(newPhoneNumbers) => {
+            setContactPhoneNumbers({
+              ...contactPhoneNumbers,
+              [item.id]: newPhoneNumbers
+            });
+          }}
+        />
+
         ))}
       </ul>
     </div>
