@@ -23,9 +23,9 @@ import Button from "../Button/Button.components";
         }
       };
   
-      fetchData(); // Call the async function inside useEffect
+      fetchData(); 
   
-      // Empty dependency array to ensure this effect runs once on component mount
+      
     }, []);
   return (
     <div className="phoneBook">

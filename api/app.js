@@ -12,7 +12,7 @@ db.sequelize.sync({ force: false }).then(() => {
     console.log("Drop and re-sync db.");
 });
 
-app.use(cors(corsOptions));
+app.use(cors({ origin: "http://localhost:3000" }));
 
 // parse requests of content-type - application/json
 app.use(express.json());
