@@ -26,14 +26,14 @@ exports.create = async (req, res) => {
 // Get all phones
 exports.findAll = async (req, res) => {
     try {
-      const contactId = req.params.contactId; // Extract contactId from the request params
+      const contactId = req.params.contactId; 
       const phones = await Phones.findAll({
-        where: { contactId }, // Filter the phone numbers by contactId
+        where: { contactId }, 
       });
       res.send(phones);
     } catch (err) {
       console.error("Error while fetching phones:", err);
-      res.status(500).json({
+      res.status(500).send({
         error:
           err.message ||
           "Some error occurred while fetching the phone numbers.",
@@ -44,15 +44,19 @@ exports.findAll = async (req, res) => {
 
 // Get one phone by id
 exports.findOne = async (req, res) => {
-  
-    try{
+  const phoneId = req.params.phoneId; // Extract phoneId from the request params
 
-    } catch(err){
-        res.send({message: 'Error while finding the phone by id: ' + err})
-        
+  try {
+    const phone = await Phones.findByPk(phoneId); // Use `findByPk` to find the phone by its primary key
+    if (!phone) {
+      return res.status(404).send({ message: "Phone not found" });
     }
+    res.send(phone);
+  } catch (err) {
+    console.error("Error while finding the phone by id:", err);
+    res.status(500).send({ error: err.message || "Some error occurred while finding the phone." });
+  }
 };
-
 // Update one phone by id
 exports.update = async(req, res) => {
 
@@ -67,16 +71,20 @@ exports.update = async(req, res) => {
 
 // Delete one phone by id
 exports.delete = async (req, res) => {
-    const id = req.params.phoneId;
+  const phoneId = req.params.phoneId; 
 
-    try{
-        Phones.destroy({
-            where: { id: id }
-        })
-
-    } catch(err){
-        res.send({message: 'Error while deleting the phone: ' + err})
-        
+  try {
+    const phone = await Phones.findByPk(phoneId); 
+    if (!phone) {
+      return res.status(404).json({ message: "Phone not found" });
     }
-    
+
+    // Delete the phone
+    await phone.destroy();
+
+    res.status(204).send(); 
+  } catch (err) {
+    console.error("Error while deleting the phone:", err);
+    res.status(500).json({ error: err.message || "Some error occurred while deleting the phone." });
+  }
 };
