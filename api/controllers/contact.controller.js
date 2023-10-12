@@ -44,14 +44,14 @@ exports.findOne = async (req, res) => {
     try{
         const required_Contact = await Contacts.findByPk(contact_Id)
         if( !required_Contact){
-            res.json({message: 'Contact not found'})
+            res.send({message: 'Contact not found'})
         }
         else{
-            res.json(required_Contact)
+            res.send(required_Contact)
         }
 
     } catch(err){
-        res.json({message: 'Error while finding the contact by id: ' + err})
+        res.send({message: 'Error while finding the contact by id: ' + err})
         
     }
   
@@ -59,23 +59,24 @@ exports.findOne = async (req, res) => {
 
 // Update one contact by id
 exports.update = async (req, res) => {
+  const contact_id = req.params.contactId;
 
-    const contact_id = req.params.contactId;
-
-    try{
-
-        const required_Contact = await Contact.findByPk(contact_id)
-        if(!required_Contact){
-            res.json({message: 'The contact in search is not on the list'})
-        }
-        else{
-        
-        }
-
-    } catch(err){
-        
+  try {
+    const required_Contact = await Contact.findByPk(contact_id);
+    if (!required_Contact) {
+      res.send({ message: 'The contact in search is not on the list' });
+    } else {
+      const updatedContact = await required_Contact.update(req.body);
+      res.json(updatedContact);
     }
-    
+  } catch (err) {
+    console.error('Error while updating contact:', err);
+    res.status(500).json({
+      error:
+        err.message ||
+        'Some error occurred while updating the contact.',
+    });
+  }
 };
 
 // Delete one contact by id

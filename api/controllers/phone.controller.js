@@ -58,15 +58,25 @@ exports.findOne = async (req, res) => {
   }
 };
 // Update one phone by id
-exports.update = async(req, res) => {
+exports.update = async (req, res) => {
+  const phoneId = req.params.phoneId;
 
-    try{
-
-    } catch(err){
-        res.send({message: 'Error while updating the phone: ' + err})
-        
+  try {
+    const phoneToUpdate = await Phones.findByPk(phoneId);
+    if (!phoneToUpdate) {
+      res.status(404).json({ message: 'Phone not found' });
+    } else {
+      const updatedPhone = await phoneToUpdate.update(req.body);
+      res.json(updatedPhone);
     }
-    
+  } catch (err) {
+    console.error('Error while updating phone:', err);
+    res.status(500).json({
+      error:
+        err.message ||
+        'Some error occurred while updating the phone.',
+    });
+  }
 };
 
 // Delete one phone by id
